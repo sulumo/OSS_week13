@@ -4,27 +4,11 @@ import {useLocation, useNavigate} from 'react-router-dom';
 
 
 export default function Detail(){
-    const [Items, setItems] = useState([]);
-    const [currentId, setCurrentId] = useState(null);
     const { state } = useLocation(); 
     const navigate = useNavigate();
-    const id = state?.id;
+    const id = state.id;
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-    const getItems = async () => {
-        try {
-            const response = await fetch("https://67288011270bd0b97555c189.mockapi.io/items");
-            if (response.ok) {
-                const data = await response.json();
-                setItems(data);
-            } else {
-                console.error(`Error: ${response.statusText}`);
-            }
-        } catch (error) {
-            console.error("Fetch error: ", error);
-        }
-    };
 
     const backToList = () => {
         navigate('/');
@@ -55,7 +39,6 @@ export default function Detail(){
     };
 
     const handleShowDeleteModal = (id) => {
-        setCurrentId(id);
         setShowDeleteModal(true);
     };
 

@@ -3,7 +3,6 @@ import {Button, Modal, Form} from "react-bootstrap";
 import {useLocation, useNavigate} from 'react-router-dom';
 
 export default function Update(){
-    const [Items, setItems] = useState([]);
     const { state } = useLocation(); 
     const navigate = useNavigate();
 
@@ -22,20 +21,6 @@ export default function Update(){
         price: state.Item.price,
         expiryDate: state.Item.expiryDate ? state.Item.expiryDate.split('T')[0] : "",
     });
-
-    const getItems = async () => {
-        try {
-        const response = await fetch("https://67288011270bd0b97555c189.mockapi.io/items");
-        if (response.ok) {
-            const data = await response.json();
-            setItems(data);
-        } else {
-            console.error(`Error: ${response.statusText}`);
-        }
-        } catch (error) {
-        console.error("Fetch error: ", error);
-        }
-    };
 
     const handleUpdate = async () => {
         if (!formData.name) {
@@ -76,7 +61,6 @@ export default function Update(){
 
             if (response.ok) {
                 navigate('/'); 
-                getItems();
             } else {
                 console.error('Update failed');
             }
